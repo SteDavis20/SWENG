@@ -1,0 +1,34 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class LowestCommonAncestor1Test {
+
+	@Test
+	public void testCheckIsNode() {
+		Node n = null;
+		assertEquals(false, LowestCommonAncestor1.checkIsNode(n));
+	}
+
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+}

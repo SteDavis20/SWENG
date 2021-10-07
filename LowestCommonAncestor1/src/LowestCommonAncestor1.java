@@ -36,10 +36,13 @@ public class LowestCommonAncestor1 {
     }
     
     public static ArrayList<Integer> populatePath(Node n) {
-        ArrayList<Integer> path = new ArrayList<Integer>();
+        if(checkIsNode(n)) {
+        	ArrayList<Integer> path = new ArrayList<Integer>();
 
-
-        return path;
+        
+        	return path;
+        }
+        return null;
     }
 
     public static Node findLowestCommonAncestor(Node root, Node v, Node w) {

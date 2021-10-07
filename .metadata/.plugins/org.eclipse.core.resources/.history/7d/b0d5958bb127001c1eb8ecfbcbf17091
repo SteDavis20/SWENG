@@ -1,0 +1,48 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import java.util.ArrayList;
+
+public class LowestCommonAncestor1Test {
+
+	@Test
+	public void testCheckIsNodeTrue() {
+		Node n = null;
+		assertEquals(false, LowestCommonAncestor1.checkIsNode(n));
+	}
+	
+	@Test
+	public void testCheckIsNodeFalse() {
+		Node n = null;
+		assertEquals(false, LowestCommonAncestor1.checkIsNode(n));
+	}
+
+
+	@Test
+	public void testPopulatePath() {
+		ArrayList<Integer> correctPath = new ArrayList<Integer>();
+		correctPath.add(1);
+		correctPath.add(4);
+		correctPath.add(6);
+		correctPath.add(8);
+		correctPath.add(12);
+		Node n = new Node(12);
+		assertEquals(correctPath, LowestCommonAncestor1.populatePath(n));
+	}
+	
+	@Test
+	public void testFindLowestCommonAncestor() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+	
+}
