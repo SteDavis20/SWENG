@@ -1,5 +1,5 @@
 public class Node {
-    private int data;
+    int data;
     Node leftChild;
     Node rightChild;
 
