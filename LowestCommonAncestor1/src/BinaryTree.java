@@ -115,5 +115,65 @@ public class BinaryTree
 			return true;
 		}
 		return false;
-	}	
+	}
+	
+	// @author: Stephen Davis
+	// Below 4 methods are used to populate various different kinds of trees for unit testing
+	public void populateLeftLeaningTree(BinaryTree tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.leftChild.leftChild = new Node(10);
+		tree.root.leftChild.leftChild.leftChild = new Node(3);
+		tree.root.leftChild.leftChild.leftChild.leftChild = new Node(5);
+	}
+	
+	// @author: Stephen Davis
+	public void populateRightLeaningTree(BinaryTree tree) {
+		tree.root = new Node(6);
+		tree.root.rightChild = new Node(4);
+		tree.root.rightChild.rightChild = new Node(10);
+		tree.root.rightChild.rightChild.rightChild = new Node(3);
+		tree.root.rightChild.rightChild.rightChild.rightChild = new Node(5);
+	}
+	
+	// @author: Stephen Davis
+	public void populateBalancedAndLongTree(BinaryTree tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.rightChild = new Node(10);
+		tree.root.leftChild.leftChild = new Node(3);
+		tree.root.leftChild.rightChild = new Node(5);
+		tree.root.rightChild.leftChild = new Node(12);
+		tree.root.rightChild.rightChild = new Node(11);
+		tree.root.leftChild.rightChild.rightChild = new Node(2);
+		tree.root.leftChild.rightChild.leftChild = new Node(7);
+		tree.root.leftChild.leftChild.leftChild = new Node(1);
+		tree.root.leftChild.leftChild.rightChild = new Node(9);
+		tree.root.rightChild.leftChild.leftChild = new Node(8);
+		tree.root.rightChild.leftChild.rightChild = new Node(13);
+		tree.root.rightChild.rightChild.leftChild = new Node(14);
+		tree.root.rightChild.rightChild.rightChild = new Node(15);
+	}
+	
+	// @author: Stephen Davis
+	public void populateShortTree(BinaryTree tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.rightChild = new Node(10);
+	}
+	
+	// @author: Stephen Davis
+		public void populateLongNarrowTree(BinaryTree tree) {
+			tree.root = new Node(6);
+			tree.root.leftChild = new Node(4);
+			tree.root.rightChild = new Node(10);
+			tree.root.leftChild.rightChild = new Node(5);
+			tree.root.leftChild.rightChild.leftChild = new Node(7);
+			tree.root.leftChild.rightChild.leftChild.rightChild = new Node(2);
+			tree.root.leftChild.rightChild.leftChild.rightChild.leftChild = new Node(8);
+			tree.root.leftChild.rightChild.rightChild = new Node(1);
+			tree.root.leftChild.rightChild.rightChild.rightChild = new Node(3);
+			tree.root.leftChild.rightChild.rightChild.rightChild.leftChild = new Node(9);
+		}
+
 }
