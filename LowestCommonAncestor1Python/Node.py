@@ -3,7 +3,7 @@
 class Node:
  
     # Constructor to create a new node
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, data):
+        self.data = data
         self.leftChild = None
         self.rightChild = None
