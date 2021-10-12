@@ -1,4 +1,6 @@
-# @author: Nikhil Kumar Singh(nickzuck_007) from GeeksForGeeks
+# @author: adapted from Nikhil Kumar Singh(nickzuck_007) from GeeksForGeeks (original author but code
+# had lots of errors and bugs, e.g., calling functions recursively without calling using "self"
+# keyword which led to "function not defined" errors where could would not compile).
 from Node import Node
 
 class BinaryTree:
@@ -127,30 +129,5 @@ class BinaryTree:
         self.root.leftChild.rightChild.rightChild = Node(1)
         self.root.leftChild.rightChild.rightChild.rightChild = Node(3)
         self.root.leftChild.rightChild.rightChild.rightChild.leftChild = Node(9)
-
-# Driver program to test above function
-def main():
-    tree = BinaryTree()
-    tree.root = Node(1)
-    tree.root.leftChild = Node(2)
-    tree.root.rightChild = Node(3)
-    tree.root.leftChild.leftChild = Node(4)
-    tree.root.leftChild.rightChild = Node(5)
-    tree.root.rightChild.leftChild = Node(6)
-    tree.root.rightChild.rightChild = Node(7)
-    lca = tree.findLCA(tree.root, 4, 5)
-    
-    if lca is not None:
-        print("LCA(4, 5) = ", lca.data)
-    else:
-        print("Node(s) are not present")
-
-    lca = tree.findLCA(tree.root, 4, 10)
-    if lca is not None:
-        print("LCA(4,10) = ", lca.data)
-    else:
-        print("Node(s) are not present")
-
-if __name__ == '__main__': main()
 
     
