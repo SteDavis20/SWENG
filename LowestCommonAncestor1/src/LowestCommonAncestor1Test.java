@@ -49,14 +49,14 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testCheckIsNode() {
-		BinaryTree treeLeaningLeft = new BinaryTree();
+		DAG treeLeaningLeft = new DAG();
 		treeLeaningLeft.populateLeftLeaningTree(treeLeaningLeft);
 		Node n = new Node(5);
 		Node n2 = new Node(16);
 		assertEquals("Checking if valid node appears in left leaning tree", true, treeLeaningLeft.checkIsNode(treeLeaningLeft.root, n));
 		assertEquals("Checking if invalid node appears in left leaning tree", false, treeLeaningLeft.checkIsNode(treeLeaningLeft.root, n2));
 		
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		assertEquals("Checking if valid node appears in balanced tree", true, balancedAndLongTree.checkIsNode(balancedAndLongTree.root, n));
 		assertEquals("Checking if valid node appears in balanced tree", false, balancedAndLongTree.checkIsNode(balancedAndLongTree.root, n2));
@@ -64,13 +64,13 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testEmptyTree() {
-		BinaryTree emptyTree = new BinaryTree();
+		DAG emptyTree = new DAG();
 		assertEquals("Checking if empty tree returns null", null, emptyTree.findLCA(3, 4));
 	}
 	
 	@Test
 	public void testfindLCASomeParent() {
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node v = new Node(1);
 		Node w = new Node(7);
@@ -80,7 +80,7 @@ public class LowestCommonAncestor1Test {
 		Node w2 = new Node(15);
 		assertEquals("Checking LCA in balanced tree where some parent is LCA", balancedAndLongTree.root.rightChild.rightChild, balancedAndLongTree.findLCA(v2.data, w2.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(9);
 		Node m1 = new Node(8);
@@ -89,19 +89,19 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testFindLCARootIsLCA() {
-		BinaryTree shortTree = new BinaryTree();
+		DAG shortTree = new DAG();
 		shortTree.populateShortTree(shortTree);
 		Node s = new Node(10);
 		Node t = new Node(4);
 		assertEquals("Checking LCA in a short tree where root is the LCA", shortTree.root, shortTree.findLCA(s.data, t.data));
 
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node v = new Node(9);
 		Node w = new Node(8);
 		assertEquals("Checking LCA in a balanced tree where root is the LCA", balancedAndLongTree.root, balancedAndLongTree.findLCA(v.data, w.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(8);
 		Node m1 = new Node(10);
@@ -110,7 +110,7 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testfindLCAVIsAncestor() {
-		BinaryTree treeLeaningRight = new BinaryTree();
+		DAG treeLeaningRight = new DAG();
 		treeLeaningRight.populateRightLeaningTree(treeLeaningRight);
 		Node v = treeLeaningRight.root;
 		Node w = null;
@@ -122,7 +122,7 @@ public class LowestCommonAncestor1Test {
 		}
 		assertEquals("Checking LCA in a right leaning tree where V (node1) is the LCA", v, treeLeaningRight.findLCA(v.data, w.data));
 		
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node v2 = balancedAndLongTree.root;
 		Node w2 = null;
@@ -134,7 +134,7 @@ public class LowestCommonAncestor1Test {
 		}
 		assertEquals("Checking LCA in a balanced tree where V (node1) is the LCA", v2, balancedAndLongTree.findLCA(v2.data, w2.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(4);
 		Node m1 = new Node(8);
@@ -143,7 +143,7 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testfindLCAWIsAncestor() {
-		BinaryTree treeLeaningRight = new BinaryTree();
+		DAG treeLeaningRight = new DAG();
 		treeLeaningRight.populateRightLeaningTree(treeLeaningRight);
 		Node w = treeLeaningRight.root;
 		Node v = null;
@@ -155,7 +155,7 @@ public class LowestCommonAncestor1Test {
 		}
 		assertEquals("Checking LCA in a right leaning tree where W (node2) is the LCA", w, treeLeaningRight.findLCA(v.data, w.data));
 		
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node w2 = balancedAndLongTree.root;
 		Node v2 = null;
@@ -167,7 +167,7 @@ public class LowestCommonAncestor1Test {
 		}
 		assertEquals("Checking LCA in a balanced tree where W (node2) is the LCA", w2, balancedAndLongTree.findLCA(v2.data, w2.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(8);
 		Node m1 = new Node(4);
@@ -176,13 +176,13 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testfindLCAVAndWEqual() {
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node v = balancedAndLongTree.root.leftChild.leftChild;
 		Node w = balancedAndLongTree.root.leftChild.leftChild;
 		assertEquals("Checking LCA in a balanced tree where V and W are the same node", v, balancedAndLongTree.findLCA(v.data, w.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(4);
 		Node m1 = new Node(4);
@@ -191,13 +191,13 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testfindLCAVNotAValidNode() {
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node v = new Node(20);
 		Node w = new Node(8);
 		assertEquals("Checking LCA in a balanced tree where V (node1) is not a valid node", null, balancedAndLongTree.findLCA(v.data, w.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(11);
 		Node m1 = new Node(8);
@@ -206,13 +206,13 @@ public class LowestCommonAncestor1Test {
 	
 	@Test
 	public void testfindLCAWNotAValidNode() {
-		BinaryTree balancedAndLongTree = new BinaryTree();
+		DAG balancedAndLongTree = new DAG();
 		balancedAndLongTree.populateBalancedAndLongTree(balancedAndLongTree);
 		Node w = new Node(20);
 		Node v = new Node(8);
 		assertEquals("Checking LCA in a balanced tree where W (node2) is not a valid node", null, balancedAndLongTree.findLCA(v.data, w.data));
 		
-		BinaryTree longNarrowTree = new BinaryTree();
+		DAG longNarrowTree = new DAG();
 		longNarrowTree.populateLongNarrowTree(longNarrowTree);
 		Node l1 = new Node(4);
 		Node m1 = new Node(11);

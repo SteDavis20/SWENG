@@ -3,7 +3,7 @@ public class LowestCommonAncestor1 {
 	/* Driver program to test LCA functions */
 	public static void main(String args[])
 	{
-		BinaryTree tree = new BinaryTree();
+		DAG tree = new DAG();
 		tree.root = new Node(1);
 		tree.root.leftChild = new Node(2);
 		tree.root.rightChild = new Node(3);
