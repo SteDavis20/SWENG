@@ -21,11 +21,7 @@ public class DAG
 	    private int E;                 // number of edges in this DAG
 	    private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
 	    private int[] indegree;        // indegree[v] = indegree of vertex v
-
-	 // Root of the Binary Tree (from previous implementation)
-		Node root;
-		static boolean v1 = false, v2 = false;					// used to check if nodes are in tree
-	
+	    
 	    /**
 	     * Initializes an empty DAG with V vertices.
 	     *
@@ -94,18 +90,18 @@ public class DAG
 	        return adj[v];
 	    }
 
-//	    /**
-//	     * Returns the number of directed edges incident from vertex {@code v}.
-//	     * This is known as the <em>outdegree</em> of vertex {@code v}.
-//	     *
-//	     * @param  v the vertex
-//	     * @return the outdegree of vertex {@code v}               
-//	     * @throws IllegalArgumentException unless {@code 0 <= v < V}
-//	     */
-//	    public int outdegree(int v) {
-//	        validateVertex(v);
-//	        return adj[v].size();
-//	    }
+	    /**
+	     * Returns the number of directed edges incident from vertex {@code v}.
+	     * This is known as the <em>outdegree</em> of vertex {@code v}.
+	     *
+	     * @param  v the vertex
+	     * @return the outdegree of vertex {@code v}               
+	     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+	     */
+	    public int outdegree(int v) {
+	        validateVertex(v);
+	        return adj[v].size();
+	    }
 
 	    /**
 	     * Returns the number of directed edges incident to vertex {@code v}.
@@ -157,6 +153,11 @@ public class DAG
 	    public static void main(String[] args) {
 	        
 	    }
+	
+	
+	// Root of the Binary Tree
+	Node root;
+	static boolean v1 = false, v2 = false;					// used to check if nodes are in tree
 
 	// This function returns pointer to LCA of two given
 	// values n1 and n2.
@@ -238,62 +239,62 @@ public class DAG
 	}
 	
 	// @author: Stephen Davis
-//	// Below 4 methods are used to populate various different kinds of trees for unit testing
-//	public void populateLeftLeaningTree(DAG tree) {
-//		tree.root = new Node(6);
-//		tree.root.leftChild = new Node(4);
-//		tree.root.leftChild.leftChild = new Node(10);
-//		tree.root.leftChild.leftChild.leftChild = new Node(3);
-//		tree.root.leftChild.leftChild.leftChild.leftChild = new Node(5);
-//	}
-//	
-//	// @author: Stephen Davis
-//	public void populateRightLeaningTree(DAG tree) {
-//		tree.root = new Node(6);
-//		tree.root.rightChild = new Node(4);
-//		tree.root.rightChild.rightChild = new Node(10);
-//		tree.root.rightChild.rightChild.rightChild = new Node(3);
-//		tree.root.rightChild.rightChild.rightChild.rightChild = new Node(5);
-//	}
-//	
-//	// @author: Stephen Davis
-//	public void populateBalancedAndLongTree(DAG tree) {
-//		tree.root = new Node(6);
-//		tree.root.leftChild = new Node(4);
-//		tree.root.rightChild = new Node(10);
-//		tree.root.leftChild.leftChild = new Node(3);
-//		tree.root.leftChild.rightChild = new Node(5);
-//		tree.root.rightChild.leftChild = new Node(12);
-//		tree.root.rightChild.rightChild = new Node(11);
-//		tree.root.leftChild.rightChild.rightChild = new Node(2);
-//		tree.root.leftChild.rightChild.leftChild = new Node(7);
-//		tree.root.leftChild.leftChild.leftChild = new Node(1);
-//		tree.root.leftChild.leftChild.rightChild = new Node(9);
-//		tree.root.rightChild.leftChild.leftChild = new Node(8);
-//		tree.root.rightChild.leftChild.rightChild = new Node(13);
-//		tree.root.rightChild.rightChild.leftChild = new Node(14);
-//		tree.root.rightChild.rightChild.rightChild = new Node(15);
-//	}
-//	
-//	// @author: Stephen Davis
-//	public void populateShortTree(DAG tree) {
-//		tree.root = new Node(6);
-//		tree.root.leftChild = new Node(4);
-//		tree.root.rightChild = new Node(10);
-//	}
-//	
-//	// @author: Stephen Davis
-//		public void populateLongNarrowTree(DAG tree) {
-//			tree.root = new Node(6);
-//			tree.root.leftChild = new Node(4);
-//			tree.root.rightChild = new Node(10);
-//			tree.root.leftChild.rightChild = new Node(5);
-//			tree.root.leftChild.rightChild.leftChild = new Node(7);
-//			tree.root.leftChild.rightChild.leftChild.rightChild = new Node(2);
-//			tree.root.leftChild.rightChild.leftChild.rightChild.leftChild = new Node(8);
-//			tree.root.leftChild.rightChild.rightChild = new Node(1);
-//			tree.root.leftChild.rightChild.rightChild.rightChild = new Node(3);
-//			tree.root.leftChild.rightChild.rightChild.rightChild.leftChild = new Node(9);
-//		}
+	// Below 4 methods are used to populate various different kinds of trees for unit testing
+	public void populateLeftLeaningTree(DAG tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.leftChild.leftChild = new Node(10);
+		tree.root.leftChild.leftChild.leftChild = new Node(3);
+		tree.root.leftChild.leftChild.leftChild.leftChild = new Node(5);
+	}
+	
+	// @author: Stephen Davis
+	public void populateRightLeaningTree(DAG tree) {
+		tree.root = new Node(6);
+		tree.root.rightChild = new Node(4);
+		tree.root.rightChild.rightChild = new Node(10);
+		tree.root.rightChild.rightChild.rightChild = new Node(3);
+		tree.root.rightChild.rightChild.rightChild.rightChild = new Node(5);
+	}
+	
+	// @author: Stephen Davis
+	public void populateBalancedAndLongTree(DAG tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.rightChild = new Node(10);
+		tree.root.leftChild.leftChild = new Node(3);
+		tree.root.leftChild.rightChild = new Node(5);
+		tree.root.rightChild.leftChild = new Node(12);
+		tree.root.rightChild.rightChild = new Node(11);
+		tree.root.leftChild.rightChild.rightChild = new Node(2);
+		tree.root.leftChild.rightChild.leftChild = new Node(7);
+		tree.root.leftChild.leftChild.leftChild = new Node(1);
+		tree.root.leftChild.leftChild.rightChild = new Node(9);
+		tree.root.rightChild.leftChild.leftChild = new Node(8);
+		tree.root.rightChild.leftChild.rightChild = new Node(13);
+		tree.root.rightChild.rightChild.leftChild = new Node(14);
+		tree.root.rightChild.rightChild.rightChild = new Node(15);
+	}
+	
+	// @author: Stephen Davis
+	public void populateShortTree(DAG tree) {
+		tree.root = new Node(6);
+		tree.root.leftChild = new Node(4);
+		tree.root.rightChild = new Node(10);
+	}
+	
+	// @author: Stephen Davis
+		public void populateLongNarrowTree(DAG tree) {
+			tree.root = new Node(6);
+			tree.root.leftChild = new Node(4);
+			tree.root.rightChild = new Node(10);
+			tree.root.leftChild.rightChild = new Node(5);
+			tree.root.leftChild.rightChild.leftChild = new Node(7);
+			tree.root.leftChild.rightChild.leftChild.rightChild = new Node(2);
+			tree.root.leftChild.rightChild.leftChild.rightChild.leftChild = new Node(8);
+			tree.root.leftChild.rightChild.rightChild = new Node(1);
+			tree.root.leftChild.rightChild.rightChild.rightChild = new Node(3);
+			tree.root.leftChild.rightChild.rightChild.rightChild.leftChild = new Node(9);
+		}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="treeLeaningLeft"/>
+		<item key="selection" value="graph"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
@@ -9,10 +9,13 @@
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
 			<item value="tree"/>
+			<item value="Digraph"/>
 			<item value="findLowestCommonAncestor"/>
 			<item value="LowestCommonAncestor1"/>
 		</list>
 		<list key="replacehistory">
+			<item value="graph"/>
+			<item value="DAG"/>
 			<item value="treeLeaningLeft"/>
 			<item value="findLCA"/>
 			<item value="BinaryTree"/>
