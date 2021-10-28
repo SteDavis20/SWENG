@@ -12,43 +12,55 @@ public class DAGTest {
 	 * The important thing to note is that a node can be an ancestor of itself. i.e., if v has a direct
 	 * connection from w, w is the lowest common ancestor. 
 	 * Cases:
-	 * 			Errors (return null):
-	 * 			v is not a node in graph
-	 * 			w is not a node in graph
-	 * 			v and w are not nodes in graph
-	 * 			graph is empty
+	 * 			Errors (return -1):
+	 * 				v is not a node in graph
+	 * 				w is not a node in graph
+	 * 				v and w are not nodes in graph
+	 * 				graph is empty
+	 * 				v and w have no common ancestor (disconnected subgraphs)
 	 * 			
 	 * 			return cases:
-	 * 			root is LCA
-	 * 			v is LCA
-	 * 			w is LCA
-	 * 			Some other parent node is LCA
+	 * 				root is LCA
+	 * 				v is LCA
+	 * 				w is LCA
+	 * 				Some other parent node is LCA
 	 * 
 	 * */
 	
 	public static void main(String[] args) {
 		
-		// populating various different kinds of graphs
-//		DAG emptygraph = new DAG();
-//		
-//		DAG graphLeaningLeft = new DAG();
-//		graphLeaningLeft.populateLeftLeaninggraph(graphLeaningLeft);
-//		
-//		DAG graphLeaningRight = new DAG();
-//		graphLeaningRight.populateRightLeaninggraph(graphLeaningRight);
-//		
-//		DAG balancedAndLonggraph = new DAG();
-//		balancedAndLonggraph.populateBalancedAndLonggraph(balancedAndLonggraph);
-//		
-//		DAG shortgraph = new DAG();
-//		shortgraph.populateShortgraph(shortgraph);
+/*--------------------Template for populating various different kinds of graphs-----------------------------------*/
+
+//		DAG emptyGraph = new DAG(0);
+		
+//		DAG singleNodeGraph = new DAG();
+//		singleNodeGraph.populateEasyGraph(singleNodeGraph);
+		
+//		DAG shortGraph = new DAG();
+//		shortGraph.populateShortGraph(shortGraph);
 		
 //		DAG longNarrowGraph = new DAG(8);
 //		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
+		
+		// has path from every vertex to every other vertex
+//		DAG connectedGraph = new DAG();
+//		connectedGraph.populateConnectedGraph(connectedGraph);
+		
+//		DAG isolatedVertexGraph = new DAG();
+//		isolatedVertexGraph.populateIsolatedVertexGraph(isolatedVertexGraph);
+		
+		// should not work for lca
+//		DAG cycleGraph = new DAG();
+//		cycleGraph.populateCycleGraph(cycleGraph);
+		
+//		DAG disjointSubGraphs = new DAG();
+//		disjointSubGraphs.populateDisjointSubGraphs(disjointSubGraphs);
+		
+//		DAG noEdgesGraph = new DAG();
+//		noEdgesGraph.populateNoEdgesGraph(noEdgesGraph);		
+
 	}
-	
-//	DAG emptygraph = new DAG();
-	
+		
 	@Test
 	public void testEmptyGraph() {
 		DAG graph = new DAG(0);

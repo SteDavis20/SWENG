@@ -1,4 +1,5 @@
 // @author: Stephen Davis
+// code is adapted from code provided by @Robert Sedgewick in his textbook Algorithms 4th Edition.
 
 import java.util.ArrayList;
 
@@ -25,7 +26,6 @@ public class DAG
 	private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
 
 	private boolean[] marked;  // marked[v] = true iff v is reachable from source(s)
-	private int count;         // number of vertices reachable from source(s)
 
 	Node root;
 
@@ -94,6 +94,8 @@ public class DAG
 		return reverse;
 	}
 
+	// Everything from here is Stephen Davis' work. 
+	//@author: Stephen Davis
 	public ArrayList<Integer> DFS(int s) {
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		marked = new boolean[this.V()];
@@ -112,38 +114,24 @@ public class DAG
 
 	// -------------------------------------------------------------------------------------------------------------
 
-	/* Source: https://www.baeldung.com/cs/lowest-common-ancestor-acyclic-graph
+	/* My Altered Approach to the following Source: https://www.baeldung.com/cs/lowest-common-ancestor-acyclic-graph
 	 * 
-	 * Suppose we want to find the LCA(u, v) in graph G. Initially, all the vertices are colored white.
+	 * variable names should explain the code sufficiently.
 	 * 
-	 *	First, we do a Depth-First Search (DFS) on one of the target nodes. Let it be node u. Also, we’ll keep track
-	 *	of the parent’s array (current path from a starting vertex). During the DFS, we color all the ancestors of u
-	 *	in red each time we reach it.
-
-	 *	Second, we should start the DFS on the other node v. When we reach it, we recolor all red ancestors of v in
-	 *	black.
-
-	 *  Finally, we build a subgraph, induced by the black nodes. The nodes in a new graph with zero out-degrees are
-	 *	the answers. 
-
+	 * Note: we first reverse the graph so we can easily access a given node's ancestors via depth-first search.
 	 */
 
 	private int findLCAHelper(Node v, Node w) {
-		boolean foundLCA = false;
 		DAG reversedGraph = this.reverse();
-
-		// keep track of parent's array
+		
 		ArrayList<Integer> vPath = reversedGraph.DFS(v.data);
 		ArrayList<Integer> wPath = reversedGraph.DFS(w.data);
-
-		// Build subgraph
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 		
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {
-					commonAncestors.add(ancestorOfV);
-					foundLCA = true;
+					commonAncestors.add(ancestorOfV);	// 1st common ancestor will be "lowest" since we reversed graph
 					return commonAncestors.get(0);
 				}
 			}
@@ -151,18 +139,15 @@ public class DAG
 		return -1;
 	}
 
-
 	public int findLCA(Node v, Node w) {
 		if(root == null) {
 			return -1;
 		}
 
-		// Check v is valid Node
 		if((v.data < 0 || v.data >= V)) {
 			return -1;
 		}
 
-		// Check w is valid Node
 		if((w.data < 0 || w.data >= V)) {
 			return -1;
 		}
@@ -178,16 +163,39 @@ public class DAG
 		
 		int lca = findLCAHelper(v, w);
 		return lca;
-		//		return lca;
+	}
+			
+	public void populateShortGraph() {
+		this.addEdge(0, 1);
+		this.addEdge(0, 2);
+	}
+	
+	public void populateIsolatedVertexGraph() {
+		
+		
 	}
 
-	// @author: Stephen Davis
+	public void populateCycleGraph() {
+		
+		
+	}
+
+	public void populateDisjointSubGraphs() {
+		
+	
+	}
+	
+	
+	public void populatenoEdgesGraph() {
+		
+		
+	}
+	
 	public void populateLongNarrowGraph(DAG graph) {
 		for(int i=0; i<V-1; i++) {
 			graph.addEdge(i, i+1);
 		}
 	}
-
 
 	//							0
 	//						/		\
@@ -198,19 +206,28 @@ public class DAG
 	//					    3
 	//	
 	public static void main(String[] args) {
-				DAG graph = new DAG(7);
-				graph.addEdge(0, 1);
-				graph.addEdge(1, 4);
-				graph.addEdge(1, 5);
-				graph.addEdge(5, 3);
-				graph.addEdge(0, 6);
-				graph.addEdge(6, 2);
-				
-				Node n1 = new Node(3);
-				Node n2 = new Node(4);
-				int lca = graph.findLCA(n1,n2);
-				System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-				System.out.println("LCA of 3 and 4: "+lca);
+//		DAG shortGraph = new DAG(3);
+//		shortGraph.populateShortGraph();
+//		String string = shortGraph.toString();
+//		System.out.println(""+string);
+		
+//		DAG singleNodeGraph = new DAG(1);
+//		String string = singleNodeGraph.toString();
+//		System.out.println(""+string);
+		
+//				DAG graph = new DAG(7);
+//				graph.addEdge(0, 1);
+//				graph.addEdge(1, 4);
+//				graph.addEdge(1, 5);
+//				graph.addEdge(5, 3);
+//				graph.addEdge(0, 6);
+//				graph.addEdge(6, 2);
+//				
+//				Node n1 = new Node(3);
+//				Node n2 = new Node(4);
+//				int lca = graph.findLCA(n1,n2);
+//				System.out.println("Expecting LCA of 3 and 4 to be 1... ");
+//				System.out.println("LCA of 3 and 4: "+lca);
 	}
 
 }
