@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LowestCommonAncestor1Test" project="LowestCommonAncestor1" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="LowestCommonAncestor1Test" time="0.019">
+    <testcase name="testEmptyGraph" classname="LowestCommonAncestor1Test" time="0.01"/>
+    <testcase name="testfindLCAWIsAncestor" classname="LowestCommonAncestor1Test" time="0.003"/>
+    <testcase name="testfindLCASomeParent" classname="LowestCommonAncestor1Test" time="0.0"/>
+    <testcase name="testfindLCAWNotAValidNode" classname="LowestCommonAncestor1Test" time="0.001"/>
+    <testcase name="testfindLCAVIsAncestor" classname="LowestCommonAncestor1Test" time="0.0"/>
+    <testcase name="testfindLCAVNotAValidNode" classname="LowestCommonAncestor1Test" time="0.0"/>
+    <testcase name="testFindLCARootIsLCA" classname="LowestCommonAncestor1Test" time="0.002"/>
+    <testcase name="testfindLCAVAndWEqual" classname="LowestCommonAncestor1Test" time="0.001"/>
+  </testsuite>
+</testrun>

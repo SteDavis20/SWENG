@@ -52,7 +52,7 @@ public class LowestCommonAncestor1Test {
 	@Test
 	public void testEmptyGraph() {
 		DAG graph = new DAG(0);
-		assertEquals("Checking LCA works for empty graph", null, graph.findLCA((new Node(1)), (new Node(2))));
+		assertEquals("Checking LCA works for empty graph", -1, graph.findLCA((new Node(1)), (new Node(2))));
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(5);
 		Node n2 = new Node(6);
-		assertEquals("Checking LCA works where some parent is LCA in long graph", n1, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where some parent is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 
 //		DAG balancedAndLonggraph = new DAG();
 //		balancedAndLonggraph.populateBalancedAndLonggraph(balancedAndLonggraph);
@@ -86,7 +86,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(0);
 		Node n2 = new Node(6);
-		assertEquals("Checking LCA works where root is LCA in long graph", n1, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where root is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 	
 //		DAG shortgraph = new DAG();
 //		shortgraph.populateShortgraph(shortgraph);
@@ -113,7 +113,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(3);
 		Node n2 = new Node(6);
-		assertEquals("Checking LCA works where node1 is LCA in long graph", n1, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where node1 is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 //		DAG graphLeaningRight = new DAG();
 //		graphLeaningRight.populateRightLeaninggraph(graphLeaningRight);
 //		Node v = graphLeaningRight.root;
@@ -151,7 +151,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(6);
 		Node n2 = new Node(3);
-		assertEquals("Checking LCA works where node2 is LCA in long graph", n2, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where node2 is LCA in long graph", n2.data, longNarrowGraph.findLCA(n1, n2));
 //		DAG graphLeaningRight = new DAG();
 //		graphLeaningRight.populateRightLeaninggraph(graphLeaningRight);
 //		Node w = graphLeaningRight.root;
@@ -189,7 +189,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(3);
 		Node n2 = new Node(3);
-		assertEquals("Checking LCA works where node1 and node2 are equal in long graph", n1, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where node1 and node2 are equal in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 //		DAG balancedAndLonggraph = new DAG();
 //		balancedAndLonggraph.populateBalancedAndLonggraph(balancedAndLonggraph);
 //		Node v = balancedAndLonggraph.root.leftChild.leftChild;
@@ -209,7 +209,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(10);
 		Node n2 = new Node(3);
-		assertEquals("Checking LCA works where node1 is an invalid node in long graph", null, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where node1 is an invalid node in long graph", -1, longNarrowGraph.findLCA(n1, n2));
 //		DAG balancedAndLonggraph = new DAG();
 //		balancedAndLonggraph.populateBalancedAndLonggraph(balancedAndLonggraph);
 //		Node v = new Node(20);
@@ -229,7 +229,7 @@ public class LowestCommonAncestor1Test {
 		longNarrowGraph.populateLongNarrowGraph(longNarrowGraph);
 		Node n1 = new Node(3);
 		Node n2 = new Node(10);
-		assertEquals("Checking LCA works where node2 is an invalid node in long graph", null, longNarrowGraph.findLCA(n1, n2));
+		assertEquals("Checking LCA works where node2 is an invalid node in long graph", -1, longNarrowGraph.findLCA(n1, n2));
 //		DAG balancedAndLonggraph = new DAG();
 //		balancedAndLonggraph.populateBalancedAndLonggraph(balancedAndLonggraph);
 //		Node w = new Node(20);
