@@ -1,11 +1,13 @@
 public class Node {
-    int data;
-//    Node leftChild;
-//    Node rightChild;
-
+	int data;
+//    String colour;
+    Node[] children;
+    
+    //    int count;
+	
     public Node(int value) {
         this.data = value;
-//        this.leftChild = null;
-//        this.rightChild = null;
+//        this.colour="white";
+//        this.count=0;
     }
 }

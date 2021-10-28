@@ -1,0 +1,7 @@
+public class Node {
+    int data;
+
+    public Node(int value) {
+        this.data = value;
+    }
+}

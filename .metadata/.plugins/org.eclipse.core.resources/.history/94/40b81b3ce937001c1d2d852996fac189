@@ -1,0 +1,9 @@
+public class Node {
+    Node[] children;
+	int data;
+    
+
+    public Node(int value) {
+        this.data = value;
+    }
+}
