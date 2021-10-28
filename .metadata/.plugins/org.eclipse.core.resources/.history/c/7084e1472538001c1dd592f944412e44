@@ -7,7 +7,7 @@ class Node {
 	int data;
 
 	Node(int value) {
-		this.data = value;
+		graph.data = value;
 	}
 }
 
@@ -37,8 +37,8 @@ public class DAG
 	 */
 	public DAG(int V) {
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a DAG must be non-negative");
-		this.V = V;
-		this.E = 0;
+		graph.V = V;
+		graph.E = 0;
 		//	        indegree = new int[V];
 		adj = (Bag<Integer>[]) new Bag[V];
 		for (int v = 0; v < V; v++) {
@@ -98,7 +98,7 @@ public class DAG
 	//@author: Stephen Davis
 	public ArrayList<Integer> DFS(int s) {
 		ArrayList<Integer> path = new ArrayList<Integer>();
-		marked = new boolean[this.V()];
+		marked = new boolean[graph.V()];
 		path = dfs(path, s);
 		return path;
 	}
@@ -106,7 +106,7 @@ public class DAG
 	public ArrayList<Integer> dfs(ArrayList<Integer> path, int v) {
 		marked[v] = true;
 		path.add(v);
-		for (int w : this.adj(v)) {
+		for (int w : graph.adj(v)) {
 			if (!marked[w]) dfs(path, w);
 		}
 		return path;	
@@ -122,7 +122,7 @@ public class DAG
 	 */
 
 	private int findLCAHelper(Node v, Node w) {
-		DAG reversedGraph = this.reverse();
+		DAG reversedGraph = graph.reverse();
 
 		ArrayList<Integer> vPath = reversedGraph.DFS(v.data);
 		ArrayList<Integer> wPath = reversedGraph.DFS(w.data);

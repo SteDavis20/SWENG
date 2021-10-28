@@ -7,7 +7,7 @@ class Node {
 	int data;
 
 	Node(int value) {
-		this.data = value;
+		graph.data = value;
 	}
 }
 
@@ -37,8 +37,8 @@ public class DAG
 	 */
 	public DAG(int V) {
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a DAG must be non-negative");
-		this.V = V;
-		this.E = 0;
+		graph.V = V;
+		graph.E = 0;
 		//	        indegree = new int[V];
 		adj = (Bag<Integer>[]) new Bag[V];
 		for (int v = 0; v < V; v++) {
@@ -98,7 +98,7 @@ public class DAG
 	//@author: Stephen Davis
 	public ArrayList<Integer> DFS(int s) {
 		ArrayList<Integer> path = new ArrayList<Integer>();
-		marked = new boolean[this.V()];
+		marked = new boolean[graph.V()];
 		path = dfs(path, s);
 		return path;
 	}
@@ -106,7 +106,7 @@ public class DAG
 	public ArrayList<Integer> dfs(ArrayList<Integer> path, int v) {
 		marked[v] = true;
 		path.add(v);
-		for (int w : this.adj(v)) {
+		for (int w : graph.adj(v)) {
 			if (!marked[w]) dfs(path, w);
 		}
 		return path;	
@@ -122,7 +122,7 @@ public class DAG
 	 */
 
 	private int findLCAHelper(Node v, Node w) {
-		DAG reversedGraph = this.reverse();
+		DAG reversedGraph = graph.reverse();
 
 		ArrayList<Integer> vPath = reversedGraph.DFS(v.data);
 		ArrayList<Integer> wPath = reversedGraph.DFS(w.data);
@@ -165,20 +165,118 @@ public class DAG
 		return lca;
 	}
 
-	public static void main(String[] args) {
-		DAG graph = new DAG(7);
+	//					0
+	//				 /	   \
+	//			   1		 2	
+	public DAG createShortGraph() {
+		DAG graph = new DAG(3);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 2);
+		return graph;
+	}
+
+	//					0
+	//				  /	   \
+	//  		    1	     6
+	//			 /     \	   \				3
+	//		  4   		 5		 2
+	//	    / 	\	 			   				 
+	//    7       8  				
+	public DAG createIsolatedVertexGraph() {
+		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
 		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
+		graph.addEdge(1, 5);
+		graph.addEdge(0, 6);
+		graph.addEdge(6, 2);
+		return graph;
+	}	
+
+	//						     0
+	//						 /		  \								  
+	//					   1	<--> 	2
+	public DAG createCycleGraph() {
+		DAG graph = new DAG(3);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 2);
+		graph.addEdge(1, 2);
+		graph.addEdge(2, 1);
+		return graph;
+	}
+
+	//				0
+	//			 /	  \
+	//		   1	    2		4 --> 5 
+	//		    \		
+	//			 3	    						6 --> 7 --> 8 	
+	public DAG createDisjointSubGraphs() {
+		DAG graph = new DAG(9);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 2);
+		graph.addEdge(1, 3);
+
+		graph.addEdge(4, 5);
+
+		graph.addEdge(6, 7);
+		graph.addEdge(7, 8);
+		return graph;
+	}
+
+	//		0 --> 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7
+	public DAG createLongNarrowGraph() {
+		DAG graph = new DAG(8);
+		for(int i=0; i<V-1; i++) {
+			graph.addEdge(i, i+1);
+		}
+		return graph;
+	}
+
+	//						0
+	//					/		\
+	//				  1		      6
+	//			   /    \		/
+	//			  4       5	  2
+	//			 / \	 /
+	//		   7    8  3 
+	public DAG createBalancedTree() {
+		DAG graph = new DAG(9);
+		graph.addEdge(0, 1);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
 		graph.addEdge(1, 5);
 		graph.addEdge(5, 3);
 		graph.addEdge(0, 6);
 		graph.addEdge(6, 2);
+		return graph;
+	}
 
-		Node n1 = new Node(3);
-		Node n2 = new Node(4);
-		int lca = graph.findLCA(n1,n2);
-		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-		System.out.println("LCA of 3 and 4: "+lca);
+
+	public static void main(String[] args) {
+		//		DAG shortGraph = new DAG(3);
+		//		shortGraph.createShortGraph();
+		//		String string = shortGraph.toString();
+		//		System.out.println(""+string);
+
+		//		DAG singleNodeGraph = new DAG(1);
+		//		String string = singleNodeGraph.toString();
+		//		System.out.println(""+string);
+
+		//				DAG graph = new DAG(7);
+		//				graph.addEdge(0, 1);
+		//				graph.addEdge(1, 4);
+		//				graph.addEdge(1, 5);
+		//				graph.addEdge(5, 3);
+		//				graph.addEdge(0, 6);
+		//				graph.addEdge(6, 2);
+		//				
+		//				Node n1 = new Node(3);
+		//				Node n2 = new Node(4);
+		//				int lca = graph.findLCA(n1,n2);
+		//				System.out.println("Expecting LCA of 3 and 4 to be 1... ");
+		//				System.out.println("LCA of 3 and 4: "+lca);
 	}
 
 }
