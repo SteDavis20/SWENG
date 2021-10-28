@@ -217,9 +217,9 @@ public class DAG
 	}
 
 	//		0 --> 1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7
-	public void populateLongNarrowGraph() {
+	public void populateLongNarrowGraph(DAG graph) {
 		for(int i=0; i<V-1; i++) {
-			this.addEdge(i, i+1);
+			graph.addEdge(i, i+1);
 		}
 	}
 
