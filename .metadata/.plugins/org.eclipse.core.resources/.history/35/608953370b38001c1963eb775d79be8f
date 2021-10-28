@@ -2,10 +2,10 @@
 
 import java.util.ArrayList;
 
-class Node {
+public class Node {
 	int data;
 	
-    Node(int value) {
+    public Node(int value) {
         this.data = value;
     }
 }

@@ -2,14 +2,6 @@
 
 import java.util.ArrayList;
 
-class Node {
-	int data;
-	
-    Node(int value) {
-        this.data = value;
-    }
-}
-
 public class DAG
 {
 

@@ -2,14 +2,6 @@
 
 import java.util.ArrayList;
 
-class Node {
-	int data;
-	
-    Node(int value) {
-        this.data = value;
-    }
-}
-
 public class DAG
 {
 
@@ -23,11 +15,14 @@ public class DAG
 	private final int V;           // number of vertices in this DAG
 	private int E;                 // number of edges in this DAG
 	private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
+	//	    private int[] indegree;        // indegree[v] = indegree of vertex v
 
 	private boolean[] marked;  // marked[v] = true iff v is reachable from source(s)
 	private int count;         // number of vertices reachable from source(s)
 
+	// Root of the Binary graph (from previous implementation)
 	Node root;
+	static boolean v1 = false, v2 = false;					// used to check if nodes are in graph
 
 	/**
 	 * Initializes an empty DAG with V vertices.
@@ -59,6 +54,7 @@ public class DAG
 
 	public void addEdge(int v, int w) {
 		adj[v].add(w);
+		//	        indegree[w]++;
 		E++;
 	}
 
@@ -67,8 +63,8 @@ public class DAG
 	}
 
 	/**
-	 * @return the number of vertices V, followed by the number of edges E,  
-	 *         followed by the V adjacency lists
+	 * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,  
+	 *         followed by the <em>V</em> adjacency lists
 	 */
 	public String toString() {
 		StringBuilder s = new StringBuilder();
@@ -138,6 +134,16 @@ public class DAG
 
 		// Build subgraph
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
+
+//		System.out.println("Path from 3 to Root:\n");
+//		for(Integer i : vPath) {
+//			System.out.println(""+i);
+//		}
+//
+//		System.out.println("Path from 4 to Root:\n");
+//		for(Integer i : wPath) {
+//			System.out.println(""+i);
+//		}
 		
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
@@ -181,6 +187,10 @@ public class DAG
 		//		return lca;
 	}
 
+
+
+	// -------------------------------------------------------------------------------------------------------------
+
 	// @author: Stephen Davis
 	public void populateLongNarrowGraph(DAG graph) {
 		for(int i=0; i<V-1; i++) {
@@ -205,12 +215,17 @@ public class DAG
 				graph.addEdge(5, 3);
 				graph.addEdge(0, 6);
 				graph.addEdge(6, 2);
+		
+		//		String graphString = graph.toString();
+		//		System.out.println("Original:\n" +graphString);
+		//		
+//				DAG reversed = graph.reverse();
+		//		String graphStringReversed = reversed.toString();
+		//		System.out.println("Reversed:\n" +graphStringReversed);
 				
 				Node n1 = new Node(3);
 				Node n2 = new Node(4);
 				int lca = graph.findLCA(n1,n2);
-				System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-				System.out.println("LCA of 3 and 4: "+lca);
 	}
 
 }
