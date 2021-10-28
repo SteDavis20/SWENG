@@ -182,7 +182,7 @@ public class DAGTest {
 	
 	@Test
 	public void testFindLCARootIsLCA() {
-		Node n1 = new Node(0);
+		Node n1 = new Node(1);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where root is LCA in long graph", 0, longNarrowGraph.findLCA(n1, n2));
 
@@ -202,7 +202,7 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node1 is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 		
 		Node n3 = new Node(1);
-		assertEquals("Checking LCA works where node1 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n3, n1));
+		assertEquals("Checking LCA works where node1 is LCA in disjoint sub graphs", n1.data, disjointSubGraphs.findLCA(n1, n3));
 
 		Node n4 = new Node(8);		
 		assertEquals("Checking LCA works where node1 is LCA in isolated vertex graph", n3.data, isolatedVertexGraph.findLCA(n3, n4));

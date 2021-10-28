@@ -182,7 +182,7 @@ public class DAGTest {
 	
 	@Test
 	public void testFindLCARootIsLCA() {
-		Node n1 = new Node(0);
+		Node n1 = new Node(1);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where root is LCA in long graph", 0, longNarrowGraph.findLCA(n1, n2));
 

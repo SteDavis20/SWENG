@@ -170,19 +170,21 @@ public class DAGTest {
 	}
 	
 	@Test
-	public void testfindLCASomeParent() {		
+	public void testfindLCASomeParent() {
+		Node n1 = new Node(5);
+		Node n2 = new Node(8);
+		assertEquals("Checking LCA works where some parent is LCA in long graph", 1, longNarrowGraph.findLCA(n1, n2));
+		
 		Node n3 = new Node(3);
 		Node n4 = new Node(2);
 		assertEquals("Checking LCA works where some parent is LCA in disjoint sub graphs", 0, disjointSubGraphs.findLCA(n3, n4));
-				
-		Node n1 = new Node(5);
-		Node n2 = new Node(7);
+						
 		assertEquals("Checking LCA works where some parent is LCA in a graph with an isolated Vertex", 1, isolatedVertexGraph.findLCA(n1, n2));
 	}	
 	
 	@Test
 	public void testFindLCARootIsLCA() {
-		Node n1 = new Node(0);
+		Node n1 = new Node(1);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where root is LCA in long graph", 0, longNarrowGraph.findLCA(n1, n2));
 
@@ -202,7 +204,7 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node1 is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
 		
 		Node n3 = new Node(1);
-		assertEquals("Checking LCA works where node1 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n3, n1));
+		assertEquals("Checking LCA works where node1 is LCA in disjoint sub graphs", n1.data, disjointSubGraphs.findLCA(n1, n3));
 
 		Node n4 = new Node(8);		
 		assertEquals("Checking LCA works where node1 is LCA in isolated vertex graph", n3.data, isolatedVertexGraph.findLCA(n3, n4));
@@ -216,10 +218,10 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node2 is LCA in long graph", n2.data, longNarrowGraph.findLCA(n1, n2));
 		
 		Node n3 = new Node(1);
-		assertEquals("Checking LCA works where node2 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n2, n3));
+		assertEquals("Checking LCA works where node2 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n1, n3));
 
 		Node n4 = new Node(8);		
-		assertEquals("Checking LCA works where node2 is LCA in isolated vertex graph", n3.data, isolatedVertexGraph.findLCA(n4, n3));
+		assertEquals("Checking LCA works where node2 is LCA in isolated vertex graph", n4.data, isolatedVertexGraph.findLCA(n3, n4));
 	}
 
 	@Test
@@ -263,6 +265,10 @@ public class DAGTest {
 		
 		Node n3 = new Node(3);
 		assertEquals("Checking LCA works where input nodes are valid but no LCA in isolated vertex graph", -1, isolatedVertexGraph.findLCA(n3, n2));
+		
+		Node n1 = new Node(3);
+		Node n2 = new Node(10);
+		assertEquals("Checking LCA works where there is no LCA in long graph", -1, longNarrowGraph.findLCA(n1, n2));
 	}
 
 }
