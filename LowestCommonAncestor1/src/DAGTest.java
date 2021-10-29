@@ -26,34 +26,25 @@ public class DAGTest {
 	 * 				Some other parent node is LCA
 	 * 
 	 * */
-	
+
 	DAG emptyGraph = new DAG(0);
-
 	DAG singleNodeGraph = new DAG(1);
-
 	DAG shortGraph = createShortGraph();	
-
 	DAG longNarrowGraph = createLongNarrowGraph();
-
-	//has path from every vertex to every other vertex
-//	DAG connectedGraph = createConnectedGraph(connectedGraph);
-
 	DAG isolatedVertexGraph = createIsolatedVertexGraph();
 
 	// should not work for lca
 	DAG cycleGraph = createCycleGraph();
 
 	DAG disjointSubGraphs = createDisjointSubGraphs();
-
 	DAG noEdgesGraph = new DAG(5);
-
-//	public static void main(String[] args) {
-//
-//	}
-
-	//	0
-	//				 /	   \
-	//			   1		 2	
+	DAG multipleParentsGraph = createMultipleParentsGraph();
+	
+	/*
+						0
+					 /	   \
+				   1		 2	
+	 */
 	public DAG createShortGraph() {
 		DAG graph = new DAG(3);
 		graph.addEdge(0, 1);
@@ -61,13 +52,15 @@ public class DAGTest {
 		return graph;
 	}
 
-	//					0
-	//				  /	   \
-	//  		    1	     6
-	//			 /     \	   \				3
-	//		  4   		 5		 2
-	//	    / 	\	 			   				 
-	//    7       8  				
+	/*
+						0
+					  /	   \
+	  		    	1	     6
+				 /     \	   \				3
+			  4   		 5		 2
+		    / 	\	 			   				 
+	      7       8  				
+	 */
 	public DAG createIsolatedVertexGraph() {
 		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
@@ -80,23 +73,29 @@ public class DAGTest {
 		return graph;
 	}	
 
-	//						     0
-	//						 /		  \								  
-	//					   1	<--> 	2
+	/*
+					 0
+				  /		^
+				 /		  \								  
+		   	   1	<--> 	2
+	 */
 	public DAG createCycleGraph() {
 		DAG graph = new DAG(3);
 		graph.addEdge(0, 1);
 		graph.addEdge(0, 2);
 		graph.addEdge(1, 2);
 		graph.addEdge(2, 1);
+		graph.addEdge(2, 0);
 		return graph;
 	}
 
-	//				0
-	//			 /	  \
-	//		   1	    2		4 --> 5 
-	//		    \		
-	//			 3	    						6 --> 7 --> 8 	
+	/*
+					0
+				 /	  \
+			   1	    2		4 --> 5 
+			    \		
+				 3	    						6 --> 7 --> 8 	
+	 */
 	public DAG createDisjointSubGraphs() {
 		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
@@ -119,13 +118,15 @@ public class DAGTest {
 		return graph;
 	}
 
-	//						0
-	//					/		\
-	//				  1		      6
-	//			   /    \		/
-	//			  4       5	  2
-	//			 / \	 /
-	//		   7    8  3 
+	/*
+							0
+						/		\
+					  1		      6
+				   /    \		/
+				  4       5	  2
+				 / \	 /
+			   7    8  3 
+	 */
 	public DAG createBalancedTree() {
 		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
@@ -138,6 +139,32 @@ public class DAGTest {
 		graph.addEdge(6, 2);
 		return graph;
 	}
+
+	/*
+						0
+  					/	   \
+				 1	     	 6
+			 /      \     	 | \				
+		   4   	       5	 |   2
+		 / 	 \	 	/    \	 |	   				 
+				  /		   \ |
+	   7       8   ---->     3  				
+	 */
+	public DAG createMultipleParentsGraph() {
+		DAG graph = new DAG(9);
+		graph.addEdge(0, 1);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
+		graph.addEdge(1, 5);
+		graph.addEdge(0, 6);
+		graph.addEdge(6, 2);
+		graph.addEdge(6, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(8, 3);
+		graph.addEdge(5, 8);
+		return graph;
+	}		
 
 	/*  Graphs for Testing:
   								emptyGraph 
@@ -157,7 +184,9 @@ public class DAGTest {
 								disjointSubGraphs
 
 								noEdgesGraph
- */
+								
+								multipleParentsGraph
+	 */
 
 	@Test
 	public void testEmptyGraph() {
@@ -168,18 +197,22 @@ public class DAGTest {
 	public void testSingleNodeGraph() {
 		assertEquals("Checking LCA works for single node graph", -1, singleNodeGraph.findLCA((new Node(1)), (new Node(2))));
 	}
-	
+
 	@Test
 	public void testfindLCASomeParent() {		
 		Node n3 = new Node(3);
 		Node n4 = new Node(2);
 		assertEquals("Checking LCA works where some parent is LCA in disjoint sub graphs", 0, disjointSubGraphs.findLCA(n3, n4));
-				
+
 		Node n1 = new Node(5);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where some parent is LCA in a graph with an isolated Vertex", 1, isolatedVertexGraph.findLCA(n1, n2));
+		
+		Node n5 = new Node(8);
+		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 1, multipleParentsGraph.findLCA(n3, n2));
+		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 4, multipleParentsGraph.findLCA(n5, n2));
 	}	
-	
+
 	@Test
 	public void testFindLCARootIsLCA() {
 		Node n1 = new Node(0);
@@ -192,7 +225,7 @@ public class DAGTest {
 
 		assertEquals("Checking LCA works where root is LCA in isolated vertex graph", 0, isolatedVertexGraph.findLCA(n2, n4));
 
-		
+
 	}
 
 	@Test
@@ -200,13 +233,13 @@ public class DAGTest {
 		Node n1 = new Node(3);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where node1 is LCA in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
-		
+
 		Node n3 = new Node(1);
 		assertEquals("Checking LCA works where node1 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n3, n1));
 
 		Node n4 = new Node(8);		
 		assertEquals("Checking LCA works where node1 is LCA in isolated vertex graph", n3.data, isolatedVertexGraph.findLCA(n3, n4));
-		
+
 	}
 
 	@Test
@@ -214,7 +247,7 @@ public class DAGTest {
 		Node n1 = new Node(7);
 		Node n2 = new Node(3);
 		assertEquals("Checking LCA works where node2 is LCA in long graph", n2.data, longNarrowGraph.findLCA(n1, n2));
-		
+
 		Node n3 = new Node(1);
 		assertEquals("Checking LCA works where node2 is LCA in disjoint sub graphs", n3.data, disjointSubGraphs.findLCA(n2, n3));
 
@@ -227,9 +260,9 @@ public class DAGTest {
 		Node n1 = new Node(3);
 		Node n2 = new Node(3);
 		assertEquals("Checking LCA works where node1 and node2 are equal in long graph", n1.data, longNarrowGraph.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node1 and node2 are equal in disjoint sub graphs", n1.data, disjointSubGraphs.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node1 and node2 are equal in isolated vertex graph", n1.data, isolatedVertexGraph.findLCA(n1, n2));
 	}
 
@@ -238,9 +271,9 @@ public class DAGTest {
 		Node n1 = new Node(10);
 		Node n2 = new Node(3);
 		assertEquals("Checking LCA works where node1 is an invalid node in long graph", -1, longNarrowGraph.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node1 is an invalid node in disjoint sub graphs", -1, disjointSubGraphs.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node1 is an invalid node in isolated vertex graph", -1, isolatedVertexGraph.findLCA(n1, n2));
 	}
 
@@ -249,18 +282,18 @@ public class DAGTest {
 		Node n1 = new Node(3);
 		Node n2 = new Node(10);
 		assertEquals("Checking LCA works where node2 is an invalid node in long graph", -1, longNarrowGraph.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node2 is an invalid node in disjoint sub graphs", -1, disjointSubGraphs.findLCA(n1, n2));
-		
+
 		assertEquals("Checking LCA works where node2 is an invalid node in isolated vertex graph", -1, isolatedVertexGraph.findLCA(n1, n2));
 	}
-	
+
 	@Test
 	public void testNoLCA() {
 		Node n1 = new Node(4);
 		Node n2 = new Node(7);
 		assertEquals("Checking LCA works where input nodes are valid but no LCA in disjoint sub graphs", -1, disjointSubGraphs.findLCA(n1, n2));
-		
+
 		Node n3 = new Node(3);
 		assertEquals("Checking LCA works where input nodes are valid but no LCA in isolated vertex graph", -1, isolatedVertexGraph.findLCA(n3, n2));
 	}

@@ -14,18 +14,13 @@ class Node {
 public class DAG
 {
 
-	/**
-	 *  @author Robert Sedgewick
-	 *  @author Kevin Wayne
-	 */
-
 	private static final String NEWLINE = System.getProperty("line.separator");
 
 	private final int V;           // number of vertices in graph DAG
 	private int E;                 // number of edges in graph DAG
 	private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
 
-	private boolean[] marked;  // marked[v] = true iff v is reachable from source(s)
+	private boolean[] marked;  	   // marked[v] = true iff v is reachable from source(s)
 
 	Node root;
 
@@ -39,7 +34,6 @@ public class DAG
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a DAG must be non-negative");
 		this.V = V;
 		this.E = 0;
-		//	        indegree = new int[V];
 		adj = (Bag<Integer>[]) new Bag[V];
 		for (int v = 0; v < V; v++) {
 			adj[v] = new Bag<Integer>();
@@ -51,10 +45,6 @@ public class DAG
 
 	public int V() {
 		return V;
-	}
-
-	public int E() {
-		return E;
 	}
 
 	public void addEdge(int v, int w) {
@@ -94,8 +84,6 @@ public class DAG
 		return reverse;
 	}
 
-	// Everything from here is Stephen Davis' work. 
-	//@author: Stephen Davis
 	public ArrayList<Integer> DFS(int s) {
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		marked = new boolean[this.V()];
@@ -112,15 +100,12 @@ public class DAG
 		return path;	
 	}
 
-	// -------------------------------------------------------------------------------------------------------------
-
 	/* My Altered Approach to the following Source: https://www.baeldung.com/cs/lowest-common-ancestor-acyclic-graph
 	 * 
-	 * variable names should explain the code sufficiently.
+	 * Variable names should explain the code sufficiently.
 	 * 
 	 * Note: we first reverse the graph so we can easily access a given node's ancestors via depth-first search.
 	 */
-
 	private int findLCAHelper(Node v, Node w) {
 		DAG reversedGraph = this.reverse();
 
@@ -165,20 +150,59 @@ public class DAG
 		return lca;
 	}
 
-	public static void main(String[] args) {
-		DAG graph = new DAG(7);
+	/*
+						0
+					/	   \
+				1	     	  6
+			/      \     	  |  \				
+		4	   	       5	  |	   2
+	  /    \	 	/    \	  |	   				 
+	 /		 \                |
+   7            8   ---->     3  				
+	 */
+	public DAG createMultipleParentsGraph() {
+		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
 		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
 		graph.addEdge(1, 5);
-		graph.addEdge(5, 3);
 		graph.addEdge(0, 6);
 		graph.addEdge(6, 2);
+		graph.addEdge(6, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(8, 3);
+		graph.addEdge(5, 8);
+		return graph;
+	}		
 
-		Node n1 = new Node(3);
-		Node n2 = new Node(4);
-		int lca = graph.findLCA(n1,n2);
-		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-		System.out.println("LCA of 3 and 4: "+lca);
+
+	/* Tester */
+	public static void main(String[] args) {
+		//		DAG graph = new DAG(7);
+		//		graph.addEdge(0, 1);
+		//		graph.addEdge(1, 4);
+		//		graph.addEdge(1, 5);
+		//		graph.addEdge(5, 3);
+		//		graph.addEdge(0, 6);
+		//		graph.addEdge(6, 2);
+		//
+		//		Node n1 = new Node(3);
+		//		Node n2 = new Node(4);
+		//		int lca = graph.findLCA(n1,n2);
+		//		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
+		//		System.out.println("LCA of 3 and 4: "+lca);
+		DAG g = new DAG(1);
+		DAG graph = g.createMultipleParentsGraph();
+
+		graph = graph.reverse();
+		System.out.println(""+graph.toString());
+		
+		Node n1 = new Node(8);
+		Node n2 = new Node(7);
+//		int lca = graph.findLCA(n1,n2);
+//		System.out.println("Expecting LCA of 8 and 7 to be 4... ");
+//		System.out.println("LCA of 8 and 7 is: "+lca);
 	}
 
 }
