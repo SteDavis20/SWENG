@@ -209,8 +209,7 @@ public class DAGTest {
 		assertEquals("Checking LCA works where some parent is LCA in a graph with an isolated Vertex", 1, isolatedVertexGraph.findLCA(n1, n2));
 		
 		Node n5 = new Node(8);
-		// could also be 1
-		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 4, multipleParentsGraph.findLCA(n3, n2));
+		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 1, multipleParentsGraph.findLCA(n3, n2));
 		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 4, multipleParentsGraph.findLCA(n5, n2));
 	}	
 

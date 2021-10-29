@@ -162,6 +162,33 @@ public class DAG
 		return lca;
 	}
 
+	/*
+						0
+					/	   \
+				1	     	  6
+			/      \     	  |  \				
+		4	   	       5	  |	   2
+	  /    \	 	/    \	  |	   				 
+	 /		 \                |
+   7            8   ---->     3  				
+	 */
+	public DAG createMultipleParentsGraph() {
+		DAG graph = new DAG(9);
+		graph.addEdge(0, 1);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
+		graph.addEdge(1, 5);
+		graph.addEdge(0, 6);
+		graph.addEdge(6, 2);
+		graph.addEdge(6, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(8, 3);
+		graph.addEdge(5, 8);
+		return graph;
+	}		
+
+
 	/* Tester */
 	public static void main(String[] args) {
 		DAG graph = new DAG(7);
@@ -177,6 +204,17 @@ public class DAG
 		int lca = graph.findLCA(n1,n2);
 		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
 		System.out.println("LCA of 3 and 4: "+lca);
+		DAG g = new DAG(1);
+		DAG graph = g.createMultipleParentsGraph();
+
+		//		graph = graph.reverse();
+		//		System.out.println(""+graph.toString());
+
+		Node n1 = new Node(8);
+		Node n2 = new Node(7);
+		int lca = graph.findLCA(n1,n2);
+		System.out.println("Expecting LCA of 8 and 7 to be 4... ");
+		System.out.println("LCA of 8 and 7 is: "+lca);
 	}
 
 }
