@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DAGTest" project="LowestCommonAncestor1" tests="10" started="10" failures="0" errors="0" ignored="0">
+  <testsuite name="DAGTest" time="0.003">
+    <testcase name="testEmptyGraph" classname="DAGTest" time="0.001"/>
+    <testcase name="testfindLCAWIsAncestor" classname="DAGTest" time="0.0"/>
+    <testcase name="testNoLCA" classname="DAGTest" time="0.0"/>
+    <testcase name="testfindLCASomeParent" classname="DAGTest" time="0.0"/>
+    <testcase name="testfindLCAWNotAValidNode" classname="DAGTest" time="0.002"/>
+    <testcase name="testfindLCAVIsAncestor" classname="DAGTest" time="0.0"/>
+    <testcase name="testfindLCAVNotAValidNode" classname="DAGTest" time="0.0"/>
+    <testcase name="testFindLCARootIsLCA" classname="DAGTest" time="0.0"/>
+    <testcase name="testfindLCAVAndWEqual" classname="DAGTest" time="0.0"/>
+    <testcase name="testSingleNodeGraph" classname="DAGTest" time="0.0"/>
+  </testsuite>
+</testrun>

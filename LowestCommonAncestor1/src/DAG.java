@@ -3,6 +3,8 @@
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.Stack;
 
 class Node {
 	int data;
@@ -19,7 +21,7 @@ public class DAG
 
 	private final int V;           // number of vertices in graph DAG
 	private int E;                 // number of edges in graph DAG
-	private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
+	private ArrayList<Integer>[] adj;    // adj[v] = adjacency list for vertex v
 
 	private boolean[] marked;  	   // marked[v] = true iff v is reachable from source(s)
 	private int[] edgeTo;  	   // last vertex on known path to this vertex
@@ -36,9 +38,9 @@ public class DAG
 		if (V < 0) throw new IllegalArgumentException("Number of vertices in a DAG must be non-negative");
 		this.V = V;
 		this.E = 0;
-		adj = (Bag<Integer>[]) new Bag[V];
+		adj = (ArrayList<Integer>[]) new ArrayList[V];
 		for (int v = 0; v < V; v++) {
-			adj[v] = new Bag<Integer>();
+			adj[v] = new ArrayList<Integer>();
 		}
 		if(V>0) {
 			root = new Node(0);
@@ -118,26 +120,72 @@ public class DAG
 	 * 
 	 * Note: we first reverse the graph so we can easily access a given node's ancestors via depth-first search.
 	 */
-	private int findLCAHelper(Node v, Node w) {
+	private int findLCAHelper(int start, Node v, Node w) {
 		DAG reversedGraph = this.reverse();
 
 		ArrayList<Integer> vPath = reversedGraph.BFS(v.data);
 		ArrayList<Integer> wPath = reversedGraph.BFS(w.data);
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 
+		System.out.println("V Path: ");
+		for(Integer i : vPath) {
+			System.out.print(""+i+", ");
+		}
+
+		System.out.println("\nW Path: ");
+		for(Integer i : wPath) {
+			System.out.print(""+i+", ");
+		}
+
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {
 					commonAncestors.add(ancestorOfV);	// 1st common ancestor will be "lowest" since we reversed graph
-					return commonAncestors.get(0);
+					//					return commonAncestors.get(0);
 				}
 			}
 		}
-		return -1;
+
+		int lca = -1;
+
+		int mostDepth = -1;
+		int ancestorDepth;
+
+		for(Integer ancestor : commonAncestors) {
+			ancestorDepth = getVertexDepth(start, ancestor);
+			if(ancestorDepth > mostDepth) {
+				mostDepth = ancestorDepth;
+				lca = ancestor;
+			}
+		}
+		return lca;
 	}
 
-	public int findLCA(Node v, Node w) {
-		if(root == null) {
+	public int getVertexDepth(int start, int destination) {
+		Stack<Integer> visited = new Stack<Integer>();
+		int depth = -1;
+		depth = getVertexDepthRecursive(start, destination, visited, depth);
+		return depth;
+	}
+
+	private int getVertexDepthRecursive(int currentVertex, int destinationVertex, Stack<Integer> visited, int depth) {
+		visited.push(currentVertex);
+		if(currentVertex == destinationVertex) {
+			depth = visited.size()-1;
+		}
+		for(Integer i : this.adj(currentVertex)) {
+			if (!visited.contains(i)) {
+				depth = getVertexDepthRecursive(i, destinationVertex, visited, depth);
+				if (!visited.empty()) {
+					visited.pop();
+				}
+			}
+		}
+		return depth;
+	}
+
+	public int findLCA(int root, Node v, Node w) {
+		if(this.root == null) {
 			return -1;
 		}
 
@@ -158,25 +206,62 @@ public class DAG
 		//			return -1;	
 		//		}
 
-		int lca = findLCAHelper(v, w);
+		int lca = findLCAHelper(root, v, w);
 		return lca;
 	}
 
-	/* Tester */
-	public static void main(String[] args) {
-		DAG graph = new DAG(7);
+	/*
+	0
+	/	   \
+1	     	 6
+/      \     	 | \				
+4   	       5	 |   2
+/ 	 \	 	/    \	 |	   				 
+/		   \ |
+7       8   ---->     3  				
+	 */
+	public DAG createMultipleParentsGraph() {
+		DAG graph = new DAG(9);
 		graph.addEdge(0, 1);
 		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
 		graph.addEdge(1, 5);
-		graph.addEdge(5, 3);
 		graph.addEdge(0, 6);
 		graph.addEdge(6, 2);
+		graph.addEdge(6, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(8, 3);
+		graph.addEdge(5, 8);
+		return graph;
+	}		
 
+
+	/* Tester */
+	public static void main(String[] args) {
+		//		DAG graph = new DAG(7);
+		//		graph.addEdge(0, 1);
+		//		graph.addEdge(1, 4);
+		//		graph.addEdge(1, 5);
+		//		graph.addEdge(5, 3);
+		//		graph.addEdge(0, 6);
+		//		graph.addEdge(6, 2);
+		//
+		//		Node n1 = new Node(3);
+		//		Node n2 = new Node(4);
+		//		int lca = graph.findLCA(n1,n2);
+		//		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
+		//		System.out.println("LCA of 3 and 4: "+lca);
+
+		DAG g = new DAG(2);
+		DAG graph = g.createMultipleParentsGraph();
 		Node n1 = new Node(3);
-		Node n2 = new Node(4);
-		int lca = graph.findLCA(n1,n2);
-		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-		System.out.println("LCA of 3 and 4: "+lca);
+		Node n2 = new Node(7);
+		int lca = graph.findLCA(0, n1, n2);
+		System.out.println("\nExpecting LCA of 3 and 7 to be 4... ");
+		System.out.println("LCA of 3 and 7: "+lca);
+
+
 	}
 
 }
