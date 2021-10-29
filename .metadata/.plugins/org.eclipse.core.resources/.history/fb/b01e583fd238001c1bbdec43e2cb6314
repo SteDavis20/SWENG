@@ -127,6 +127,16 @@ public class DAG
 		ArrayList<Integer> wPath = reversedGraph.BFS(w.data);
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 
+		System.out.println("V Path: ");
+		for(Integer i : vPath) {
+			System.out.print(""+i+", ");
+		}
+
+		System.out.println("\nW Path: ");
+		for(Integer i : wPath) {
+			System.out.print(""+i+", ");
+		}
+
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {

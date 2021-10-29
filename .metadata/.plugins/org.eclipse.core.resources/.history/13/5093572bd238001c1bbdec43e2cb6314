@@ -127,6 +127,16 @@ public class DAG
 		ArrayList<Integer> wPath = reversedGraph.BFS(w.data);
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 
+		System.out.println("V Path: ");
+		for(Integer i : vPath) {
+			System.out.print(""+i+", ");
+		}
+
+		System.out.println("\nW Path: ");
+		for(Integer i : wPath) {
+			System.out.print(""+i+", ");
+		}
+
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {
@@ -190,26 +200,68 @@ public class DAG
 		if(v.data==w.data) {
 			return v.data;
 		}
-		
+
+		// if no cycles exist proceed
+		//		if() {
+		//			return -1;	
+		//		}
+
 		int lca = findLCAHelper(root, v, w);
 		return lca;
 	}
 
+	/*
+	0
+	/	   \
+1	     	 6
+/      \     	 | \				
+4   	       5	 |   2
+/ 	 \	 	/    \	 |	   				 
+/		   \ |
+7       8   ---->     3  				
+	 */
+	public DAG createMultipleParentsGraph() {
+		DAG graph = new DAG(9);
+		graph.addEdge(0, 1);
+		graph.addEdge(1, 4);
+		graph.addEdge(4, 7);
+		graph.addEdge(4, 8);
+		graph.addEdge(1, 5);
+		graph.addEdge(0, 6);
+		graph.addEdge(6, 2);
+		graph.addEdge(6, 3);
+		graph.addEdge(5, 3);
+		graph.addEdge(8, 3);
+		graph.addEdge(5, 8);
+		return graph;
+	}		
+
+
 	/* Tester */
 	public static void main(String[] args) {
-				DAG graph = new DAG(7);
-				graph.addEdge(0, 1);
-				graph.addEdge(1, 4);
-				graph.addEdge(1, 5);
-				graph.addEdge(5, 3);
-				graph.addEdge(0, 6);
-				graph.addEdge(6, 2);
-		
-				Node n1 = new Node(3);
-				Node n2 = new Node(4);
-				int lca = graph.findLCA(0, n1, n2);
-				System.out.println("Expecting LCA of 3 and 4 to be 1... ");
-				System.out.println("LCA of 3 and 4: "+lca);
+		//		DAG graph = new DAG(7);
+		//		graph.addEdge(0, 1);
+		//		graph.addEdge(1, 4);
+		//		graph.addEdge(1, 5);
+		//		graph.addEdge(5, 3);
+		//		graph.addEdge(0, 6);
+		//		graph.addEdge(6, 2);
+		//
+		//		Node n1 = new Node(3);
+		//		Node n2 = new Node(4);
+		//		int lca = graph.findLCA(n1,n2);
+		//		System.out.println("Expecting LCA of 3 and 4 to be 1... ");
+		//		System.out.println("LCA of 3 and 4: "+lca);
+
+		DAG g = new DAG(2);
+		DAG graph = g.createMultipleParentsGraph();
+		Node n1 = new Node(3);
+		Node n2 = new Node(7);
+		int lca = graph.findLCA(0, n1, n2);
+		System.out.println("\nExpecting LCA of 3 and 7 to be 4... ");
+		System.out.println("LCA of 3 and 7: "+lca);
+
+
 	}
 
 }
