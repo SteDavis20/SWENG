@@ -126,7 +126,8 @@ public class DAG
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {
-					commonAncestors.add(ancestorOfV);	
+					commonAncestors.add(ancestorOfV);	// 1st common ancestor will be "lowest" since we reversed graph
+					//					return commonAncestors.get(0);
 				}
 			}
 		}

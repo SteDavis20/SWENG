@@ -191,9 +191,6 @@ public class DAGTest {
 
 		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 4, multipleParentsGraph.findLCA(0, n3, n2));
 		assertEquals("Checking LCA works where some parent is LCA in a graph with multiple parents for one Vertex", 4, multipleParentsGraph.findLCA(0, n5, n2));
-		
-		assertEquals("Checking LCA works where some parent is LCA in balanced tree", 1, balancedTree.findLCA(0, n2, n3));
-		assertEquals("Checking LCA works where some parent is LCA in balanced tree", 1, balancedTree.findLCA(0, n2, n1));
 	}	
 
 	@Test
@@ -232,7 +229,7 @@ public class DAGTest {
 		Node n5 = new Node(4);
 		assertEquals("Checking LCA works where node1 is LCA in a graph with multiple parents for one Vertex", n5.data, multipleParentsGraph.findLCA(0, n5, n1));
 		
-		assertEquals("Checking LCA works where node1 is LCA in balanced tree", n5.data, balancedTree.findLCA(0, n5, n2));		
+		assertEquals("Checking LCA works where node1 is LCA in balanced tree", n5.data, balancedTree.findLCA(0, n5, n2));
 	}
 
 	@Test
@@ -265,8 +262,6 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node1 and node2 are equal in a graph with multiple parents for one Vertex", n1.data, multipleParentsGraph.findLCA(0, n1, n2));
 
 		assertEquals("Checking LCA works where node1 and node2 are equal in balanced tree", n1.data, balancedTree.findLCA(0, n1, n2));
-		
-		assertEquals("Checking LCA works where node1 and node2 are equal in graph with no edges", n1.data, noEdgesGraph.findLCA(0, n1, n2));
 	}
 
 	@Test
@@ -282,8 +277,6 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node1 is an invalid node in a graph with multiple parents for one Vertex", -1, multipleParentsGraph.findLCA(0, n1, n2));
 		
 		assertEquals("Checking LCA works where node1 is an invalid node in balanced tree", -1, balancedTree.findLCA(0, n1, n2));
-		
-		assertEquals("Checking LCA works where node1 is an invalid node in graph with no edges", -1, noEdgesGraph.findLCA(0, n1, n2));
 	}
 
 	@Test
@@ -299,25 +292,16 @@ public class DAGTest {
 		assertEquals("Checking LCA works where node2 is an invalid node in a graph with multiple parents for one Vertex", -1, multipleParentsGraph.findLCA(0, n1, n2));
 		
 		assertEquals("Checking LCA works where node2 is an invalid node in balanced tree", -1, balancedTree.findLCA(0, n1, n2));
-		
-		assertEquals("Checking LCA works where node2 is an invalid node in graph with no edges", -1, noEdgesGraph.findLCA(0, n1, n2));
 	}
 
 	@Test
 	public void testNoLCA() {
 		Node n1 = new Node(4);
 		Node n2 = new Node(7);
-		Node n3 = new Node(3);
-		Node n4 = new Node(5);
-		Node n5 = new Node(2);
 		assertEquals("Checking LCA works where input nodes are valid but no LCA in disjoint sub graphs", -1, disjointSubGraphs.findLCA(0, n1, n2));
-		assertEquals("Checking LCA works where input nodes are valid but no LCA in disjoint sub graphs", -1, disjointSubGraphs.findLCA(0, n3, n4));
-		
-		assertEquals("Checking LCA works where input nodes are valid but no LCA in isolated vertex graph", -1, isolatedVertexGraph.findLCA(0, n3, n2));
-		
-		assertEquals("Checking LCA works where input nodes are valid but no LCA in graph with no edges", -1, noEdgesGraph.findLCA(0, n1, n3));		
-		assertEquals("Checking LCA works where input nodes are valid but no LCA in graph with no edges", -1, noEdgesGraph.findLCA(0, n1, n5));
 
+		Node n3 = new Node(3);
+		assertEquals("Checking LCA works where input nodes are valid but no LCA in isolated vertex graph", -1, isolatedVertexGraph.findLCA(0, n3, n2));
 	}
 
 }

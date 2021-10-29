@@ -23,6 +23,7 @@ public class DAG
 	private ArrayList<Integer>[] adj;    // adj[v] = adjacency list for vertex v
 
 	private boolean[] marked;  	   // marked[v] = true iff v is reachable from source(s)
+	private int[] edgeTo;  	   // last vertex on known path to this vertex
 
 	Node root;
 
@@ -89,6 +90,7 @@ public class DAG
 	public ArrayList<Integer> BFS(int s) {
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		marked = new boolean[this.V()];
+		edgeTo = new int[this.V()];
 		path = bfs(path, s);
 		return path;
 	}
@@ -102,6 +104,7 @@ public class DAG
 			path.add(s);
 			for (int w : this.adj(s)) {
 				if (!marked[w]) {
+					edgeTo[w] = s;
 					marked[w] = true;
 					queue.add(w);
 				}
@@ -126,7 +129,8 @@ public class DAG
 		for(Integer ancestorOfV : vPath) {
 			for(Integer ancestorOfW : wPath) {
 				if(ancestorOfV == ancestorOfW) {
-					commonAncestors.add(ancestorOfV);	
+					commonAncestors.add(ancestorOfV);	// 1st common ancestor will be "lowest" since we reversed graph
+					//					return commonAncestors.get(0);
 				}
 			}
 		}
